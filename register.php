@@ -12,12 +12,12 @@
 		echo "</form>";
 	}
 
-	if(isset($_POST['nazwisko'])||isset($_POST['email'])||isset($_POST['haslo'])||
-		isset($_POST['repeat_haslo'])){
+
 		if(isset($_POST['nazwisko'])&&isset($_POST['email'])&&isset($_POST['haslo'])&&
-			isset($_POST['repeat_haslo'])&&($_POST['haslo']==$_POST['repeat_haslo'])){
-			$query = " INSERT INTO `nazwiska`(`nazwisko`,`email`,`haslo`) VALUES ('";
-			$query .= $_POST['nazwisko']."', '".$_POST['email']."', '".md5($_POST['haslo'])."')";
+			isset($_POST['repeat_haslo'])&&($_POST['haslo']==$_POST['repeat_haslo']) && isset($_POST['imie'])){
+			$query = " INSERT INTO `uzytkownicy`(`nazwisko`,`email`,`haslo`,`imie`) VALUES ('";
+			$query .= $_POST['nazwisko']."', '".$_POST['email']."', '".md5($_POST['haslo']). "" . 
+			$_POST['imie']."')";
 
 			$wynik = mysqli_query($mysqli,$query)
 			or die("Błąd zapytania:". mysqli_error($mysqli));
@@ -32,7 +32,6 @@
 		else {
 			echo "Przesłany formularz ma puste pola lub hasło zostało błędnie powtórzone.";
 		}
-	}
 	
 ?>
 	<form action = "register.php" method = "POST">

@@ -26,7 +26,7 @@
 		}
 	?>
 
-	<form action="diagnose.php">
+	<form action="diagnose.php" method="POST">
 	<input type="hidden" name="id_pacjenta" value=<?echo $_POST['id'];?> size="20" maxlength="30" />
 	<input type="submit" value="Postaw diagnozę" />
 	</form>
