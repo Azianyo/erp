@@ -4,7 +4,7 @@
 	include("polacz.php");
 	include("sessioncheck.php");
 
-	print_r($_POST);
+	echo "<h1>" . $_POST['imie'] . " " . $_POST['nazwisko'] . "</h1>";
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "1" || $wiersz['uprawnienia'] == "-1")){
 		$tables = array('morfologia', 'choroby', 'diagnozy');
 			foreach($tables as $table) {
@@ -17,7 +17,7 @@
 				echo "<h2>" . $table ."</h2>";
 				while($row = mysqli_fetch_assoc($sukces)){
 					foreach($row as $key => $obj) {
-						if($key == "id_pacjenta" || $key == "id") {}
+						if($key == "id_pacjenta" || $key == "id" || $key == 'id_lekarza') {}
 						else {
 							echo $key . ": " . $obj . " ";
 						}
