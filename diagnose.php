@@ -47,7 +47,7 @@
 
 		foreach($tables as $table) {
 
-			$query1 = "SELECT * FROM `". $table . "` WHERE id_pacjenta='". $_POST['id'] . "'";
+			$query1 = "SELECT * FROM `". $table . "` WHERE id_pacjenta='". $_POST['id_pacjenta'] . "'";
 			$sukces = mysqli_query($mysqli,$query1)
 			or die('Błąd zapytania' . mysqli_error($mysqli));
 
@@ -56,11 +56,12 @@
 				echo "<h2>" . $table ."</h2>";
 				while($row = mysqli_fetch_assoc($sukces)){
 					foreach($row as $key => $obj) {
-						if($key == "id_pacjenta" || $key == "id") {}
+						if($key == "id_pacjenta" || $key == "id" || $key == 'id_lekarza') {}
 						else {
-							echo $key . ": " . $obj . "<br>";
+							echo $key . ": " . $obj . " ";
 						}
 					}
+					echo "<br>";
 				}
 			}
 
@@ -79,12 +80,29 @@
 						$forma.= "<input type=\"hidden\" name=\"". $key ."\" value=\"" . $_POST['id_pacjenta'] ."\" size=\"20\" maxlength=\"30\" /><br>";
 
 					}
+					else if($key == 'nazwisko_lekarza') {
+						$forma.= "<input type=\"hidden\" name=\"". $key ."\" value=\"" . $_SESSION['nazwisko'] ."\" size=\"20\" maxlength=\"30\" /><br>";
+
+					}
+					else if($key == 'id_lekarza') {
+						$query = "SELECT * FROM `uzytkownicy` WHERE nazwisko='" . $_SESSION['nazwisko'] ."' AND uprawnienia='1'";
+						echo $query;
+						$sukces = mysqli_query($mysqli,$query)
+						or die('Błąd zapytania' . mysqli_error($mysqli));
+
+						if($sukces){
+							while($row = mysqli_fetch_assoc($sukces)){
+								echo $row['id'];
+								$forma.= "<input type=\"hidden\" name=\"id_lekarza\" value=\"" . $row['id'] ."\" size=\"20\" maxlength=\"30\" /><br>";
+							}
+						}
+					}
 					else {
 						$forma.= $key . ": <input type=\"text\" name=\"". $key ."\" size=\"20\" maxlength=\"30\" /><br>";
 					}
 				}
 			}
-			$forma.= "<input type=\"submit\" value=\"Dodaj rekord\" />";
+			$forma.= "<input type=\"submit\" value=\"Dodaj diagnozę\" />";
 			$forma.="</form>";
 			echo $forma;
 		}
