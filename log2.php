@@ -64,9 +64,11 @@
 					case 0:
 						echo "Pracownik laboratorium";
 
-						$forma ="<form action = \"add.php\" method=\"POST\">";
+						$forma ="<form action = \"edit.php\" method=\"POST\">";
 						$forma.= "<input type=\"submit\" value=\"Dodaj badanie\" />";
 						$forma.="</form>";
+
+						echo $forma;
 						break;
 					case 1:
 						echo "Lekarz<br>";
@@ -87,16 +89,11 @@
 						echo "Coś poszło nie tak";
 						break;
 				}
-
-				$forma ="<form action = \"dalej.php\" method=\"POST\">";
-				$forma.= "<input type=\"submit\" value=\"Kontynuacja sesji\" />";
-				$forma.="</form>";
 				
 				$button="<form action=\"wyloguj.php\" method=\"POST\">";
 				$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
 				$button.= "</form>";
 
-				echo $forma;
 				echo $button;
 			
 			}
