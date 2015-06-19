@@ -7,7 +7,7 @@
 
 	print_r($_SESSION);
 
-	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1')){
+	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1' || $wiersz['uprawnienia'] == '-1')){
 		$tables = array('choroby');
 		if(isset($_POST['TABELA'])) {
 			$add = "INSERT INTO `". $_POST['TABELA'] ."`(`";
@@ -68,12 +68,23 @@
 			$forma.= "<input type=\"submit\" value=\"Dodaj rekord\" />";
 			$forma.="</form>";
 			echo $forma;
+
+			$form2= "<form action=\"edit.php\">";
+			$form2.= "<input type=\"submit\" value=\"Wróć\" />";
+			$form2.= "</form>";	
+
+			$form3= "<form action=\"log2.php\">";
+			$form3.= "<input type=\"submit\" value=\"Wróć\" />";
+			$form3.= "</form>";
+
+			if($wiersz['uprawnienia'] == "1"){
+				echo $form2;
+			}
+			else {
+				echo $form3;
+			}		
 		}
 ?>	
-
-		<form action="edit.php">
-		<input type="submit" value="Wróć" />
-		</form>
 
 		<form action="wyloguj.php" method="POST">
 		<input type = "submit" value="Wyloguj"/>

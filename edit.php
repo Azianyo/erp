@@ -17,11 +17,9 @@
 					$forma.="<input type=\"text\" name=\"TABELA\" value=\"" . $table."\" size=\"20\" maxlength=\"30\" />";
 					foreach($row as $key => $obj) {
 						if($key == "haslo" || $key == "uprawnienia") {
-							//$forma.="<input type=\"hidden\" name=\"ID\" value=\"" . $row[$key] ."\" />";
 						}
 						else {
 							echo $key . ": " . $obj . "   ";
-							//$forma.="<input type=\"text\" name=\"" . strtoupper($key) . "\" value=\"" . $row[$key]."\" size=\"20\" maxlength=\"30\" />";
 						}
 					}
 					$forma ="<form action = \"edit2.php\" method=\"POST\">";

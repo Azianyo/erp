@@ -18,12 +18,12 @@
 		echo "Sesja nie zostala jeszcze zainicjowana <br><br>";
 		
 	if ((!isset($_POST['email'])) && (isset($_SESSION))){
-		$kwerenda = "select email, haslo, nazwisko, uprawnienia from uzytkownicy ";
-		$kwerenda.= "where nazwisko = \"". $_SESSION['nazwisko']. "\""; //"\" AND haslo = \"". md5($_SESSION['haslo']). "\"";
+		$kwerenda = "select id, email, haslo, nazwisko, uprawnienia from uzytkownicy ";
+		$kwerenda.= "where nazwisko = \"". $_SESSION['nazwisko']. "\""; 
 	}
 	else {
 
-	$kwerenda = "select email, haslo, nazwisko, uprawnienia from uzytkownicy ";
+	$kwerenda = "select id, email, haslo, nazwisko, uprawnienia from uzytkownicy ";
 	$kwerenda.= "where email = \"". $_POST['email']. "\"";
 	}
 	echo $kwerenda . "<br><br>";
@@ -53,6 +53,13 @@
 					case -1:
 						echo "Pacjent";
 						echo "<br>";
+
+						$forma1 ="<form action = \"edit2.php\" method=\"POST\">";
+						$forma1.="<input type=\"hidden\" name=\"id\" value=\"". $wiersz['id'] ."\" size=\"20\" maxlength=\"30\" />";
+						$forma1.= "<input type=\"submit\" value=\"Mój rekord pacjenta\" />";
+						$forma1.="</form>";
+
+						echo $forma1;
 						break;
 					case 0:
 						echo "Pracownik laboratorium";
@@ -80,13 +87,14 @@
 						echo "Coś poszło nie tak";
 						break;
 				}
+
 				$forma ="<form action = \"dalej.php\" method=\"POST\">";
 				$forma.= "<input type=\"submit\" value=\"Kontynuacja sesji\" />";
 				$forma.="</form>";
 				
-						$button="<form action=\"wyloguj.php\" method=\"POST\">";
-						$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
-						$button.= "</form>";
+				$button="<form action=\"wyloguj.php\" method=\"POST\">";
+				$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
+				$button.= "</form>";
 
 				echo $forma;
 				echo $button;

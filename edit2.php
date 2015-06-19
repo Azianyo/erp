@@ -4,8 +4,9 @@
 	include("polacz.php");
 	include("sessioncheck.php");
 
-	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "1")){
-		$tables = array('morfologia', 'choroby');
+	print_r($_POST);
+	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "1" || $wiersz['uprawnienia'] == "-1")){
+		$tables = array('morfologia', 'choroby', 'diagnozy');
 			foreach($tables as $table) {
 			$query = "SELECT * FROM `". $table . "` WHERE id_pacjenta='". $_POST['id'] . "'";
 			$sukces = mysqli_query($mysqli,$query)
@@ -18,27 +19,44 @@
 					foreach($row as $key => $obj) {
 						if($key == "id_pacjenta" || $key == "id") {}
 						else {
-							echo $key . ": " . $obj . "<br>";
+							echo $key . ": " . $obj . " ";
 						}
 					}
+					echo "<br>";
 				}
 			}
 		}
-	?>
 
-	<form action="diagnose.php" method="POST">
-	<input type="hidden" name="id_pacjenta" value=<?echo $_POST['id'];?> size="20" maxlength="30" />
-	<input type="submit" value="Postaw diagnozę" />
-	</form>
+		$form1= "<form action=\"diagnose.php\" method=\"POST\">";
+		$form1.= "<input type=\"hidden\" name=\"id_pacjenta\" value=\"" . $_POST['id'] ."\" size=\"20\" maxlength=\"30\" />";
+		$form1.= "<input type=\"submit\" value=\"Postaw diagnozę\" />";
+		$form1.= "</form>";
+
+		$form2= "<form action=\"edit.php\">";
+		$form2.= "<input type=\"submit\" value=\"Wróć\" />";
+		$form2.= "</form>";	
+
+		$form3= "<form action=\"log2.php\">";
+		$form3.= "<input type=\"submit\" value=\"Wróć\" />";
+		$form3.= "</form>";			
+
+
+	?>
 
 	<form action="disease.php" method="POST">
 	<input type="hidden" name="id_pacjenta" value=<?echo $_POST['id'];?> size="20" maxlength="30" />
 	<input type="submit" value="Dodaj przebytą chorobę" />
 	</form>
 
-	<form action="edit.php">
-	<input type="submit" value="Wróć" />
-	</form>
+	<?
+		if($wiersz['uprawnienia'] == "1"){
+			echo $form1;
+			echo $form2;
+		}
+		else {
+			echo $form3;
+		}
+	?>
 
 	<form action="wyloguj.php" method="POST">
 	<input type = "submit" value="Wyloguj"/>
