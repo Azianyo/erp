@@ -56,6 +56,10 @@
 						break;
 					case 0:
 						echo "Pracownik laboratorium";
+
+						$forma ="<form action = \"add.php\" method=\"POST\">";
+						$forma.= "<input type=\"submit\" value=\"Dodaj badanie\" />";
+						$forma.="</form>";
 						break;
 					case 1:
 						echo "Lekarz<br>";
@@ -68,18 +72,9 @@
 						$forma1.= "<input type=\"submit\" value=\"Wybierz pacjenta\" />";
 						$forma1.="</form>";
 
-						$forma2 ="<form action = \"delete.php\">";
-						$forma2.= "<input type=\"submit\" value=\"Usuwaj rekordy\" />";
-						$forma2.="</form>";
-
-						$forma3 ="<form action = \"calendar.php\">";
-						$forma3.= "<input type=\"submit\" value=\"Przeglądaj kalendarz\" />";
-						$forma3.="</form>";
-
 						echo $forma;
 						echo $forma1;
-						echo $forma2;
-						echo $forma3;
+
 						break;
 					default:
 						echo "Coś poszło nie tak";

@@ -5,7 +5,7 @@
 	include("sessioncheck.php");
 
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "1")){
-		$tables = array('morfologia');
+		$tables = array('morfologia', 'choroby');
 			foreach($tables as $table) {
 			$query = "SELECT * FROM `". $table . "` WHERE id_pacjenta='". $_POST['id'] . "'";
 			$sukces = mysqli_query($mysqli,$query)
@@ -31,9 +31,19 @@
 	<input type="submit" value="Postaw diagnozę" />
 	</form>
 
+	<form action="disease.php" method="POST">
+	<input type="hidden" name="id_pacjenta" value=<?echo $_POST['id'];?> size="20" maxlength="30" />
+	<input type="submit" value="Dodaj przebytą chorobę" />
+	</form>
+
 	<form action="edit.php">
 	<input type="submit" value="Wróć" />
 	</form>
+
+	<form action="wyloguj.php" method="POST">
+	<input type = "submit" value="Wyloguj"/>
+	</form>
+
 
 			<?
 	}

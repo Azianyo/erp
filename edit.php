@@ -44,6 +44,10 @@
 		<input type="submit" value="Wróć" />
 		</form>
 
+		<form action="wyloguj.php" method="POST">
+		<input type = "submit" value="Wyloguj"/>
+		</form>
+
 		<?
 	}
 	else {
