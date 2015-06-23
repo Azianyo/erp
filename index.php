@@ -27,7 +27,8 @@ if(isset($_SESSION['login'])){
 
     <div class="wrapper">
 	<div class="container">
-		<h1>Welcome</h1>
+		<h1>Elektroniczny rejestr pacjenta <br>
+		Witamy!</h1>
 		
 		<form class="form" action = "log2.php" method = "POST" >
 			<input type="text" name="email">

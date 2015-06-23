@@ -24,9 +24,6 @@
 					if(end($_POST) == $val){
 						$add.= $val . "')";
 					}
-					else if($key == 'HASLO'){
-						$add .= md5($val) . "', '";;
-					}
 					else if($key == 'TABELA') {}
 					else {
 						$add.= $val . "', '";
@@ -70,6 +67,12 @@
 			echo $forma;
 		}
 ?>	
+
+		<FORM ACTION="upload.php" METHOD="POST" ENCTYPE="multipart/form-data">
+		Zdjęcie: </td><td><INPUT type="file" name="zdjecie">
+		<input type="submit" name="ok" value="Wyślij zdjęcie do bazy"/>
+		<input type="hidden" name="id_pacjenta" value=<?echo "\"".$_POST['id'] . "\"";?> size="20" maxlength="30"/>
+		</FORM>
 
 		<form action="log2.php">
 		<input type="submit" value="Wróć" />

@@ -11,7 +11,8 @@
 
 	echo "<h1>" . $_POST['imie'] . " " . $_POST['nazwisko'] . "</h1>";
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "1" || $wiersz['uprawnienia'] == "-1")){
-		$tables = array('morfologia', 'choroby', 'diagnozy');
+
+		$tables = array('morfologia', 'choroby', 'diagnozy', 'zdjecia');
 			foreach($tables as $table) {
 			$query = "SELECT * FROM `". $table . "` WHERE id_pacjenta='". $_POST['id'] . "'";
 			$sukces = mysqli_query($mysqli,$query)
@@ -22,7 +23,10 @@
 				echo "<h2>" . $table ."</h2>";
 				while($row = mysqli_fetch_assoc($sukces)){
 					foreach($row as $key => $obj) {
-						if($key == "id_pacjenta" || $key == "id" || $key == 'id_lekarza') {}
+						if($key == 'zdjecie'){	
+							echo "<a href=\"http://student.agh.edu.pl/~borzemsk/erp/showimage.php?id=". $row['id'] ."\"> Link do zdjęcia </a>";
+						}
+						else if($key == "id_pacjenta" || $key == "id" || $key == 'id_lekarza') {}
 						else {
 							echo $key . ": " . $obj . " ";
 						}
