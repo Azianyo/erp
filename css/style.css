@@ -44,7 +44,7 @@ body :-ms-input-placeholder {
   top: 0px;
   left: 0;
   width: 100%;
-  height: 4000px;
+  height: 1500px;
   overflow: hidden;
 }
 .wrapper.form-success .container h1 {
@@ -110,6 +110,24 @@ form button {
   font-size: 18px;
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s;
+}
+
+button {
+  appearance: none;
+  outline: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  font-weight: 300;
 }
 form button:hover {
   background-color: #f5f7f9;
