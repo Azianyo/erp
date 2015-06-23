@@ -5,10 +5,10 @@
 	include("polacz.php");
 	include("sessioncheck.php");
 
-	print_r($_SESSION);
+	print_r($_POST);
 
-	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1')){
-		$tables = array('uzytkownicy');
+	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '0')){
+		$tables = array('morfologia');
 		if(isset($_POST['TABELA'])) {
 			$add = "INSERT INTO `". $_POST['TABELA'] ."`(`";
 				foreach($_POST as $key => $val){
@@ -43,9 +43,9 @@
 		}
 
 		
-
+		echo "<h1>" . $_POST['imie'] . " " . $_POST['nazwisko'] . "</h1>";
 		foreach($tables as $table) {
-			$forma = "<form action=\"add.php\" method=\"POST\">";
+			$forma = "<form action=\"badanie.php\" method=\"POST\">";
 			$forma.="<input type=\"hidden\" name=\"TABELA\" value=\"" . $table."\" size=\"20\" maxlength=\"30\" />";
 			$query = "SELECT * FROM `". $table ."` WHERE 1";
 			echo "<h1>". strtoupper($table) ."</h1>";
@@ -55,11 +55,11 @@
 			if($sukces){
 				$row = mysqli_fetch_assoc($sukces);
 				foreach($row as $key => $obj){
-					if($key == 'id'){}
-					else if($key == 'haslo') {
-						$forma.= "Hasło" . ": <input type=\"password\" name=\"". $key ."\" size=\"20\" maxlength=\"30\" /><br>";
+					if($key == 'id_pacjenta') {
+						$forma.= "<input type=\"hidden\" name=\"". $key ."\" value=\"" . $_POST['id'] . " \" size=\"20\" maxlength=\"30\" /><br>";
 
 					}
+					else if($key == 'id'){}
 					else {
 						$forma.= $key . ": <input type=\"text\" name=\"". $key ."\" size=\"20\" maxlength=\"30\" /><br>";
 					}

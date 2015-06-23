@@ -7,8 +7,8 @@
 
 	print_r($_SESSION);
 
-	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1')){
-		$tables = array('uzytkownicy');
+	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1' || $wiersz['uprawnienia'] == '-1')){
+		$tables = array('choroby');
 		if(isset($_POST['TABELA'])) {
 			$add = "INSERT INTO `". $_POST['TABELA'] ."`(`";
 				foreach($_POST as $key => $val){
@@ -45,7 +45,7 @@
 		
 
 		foreach($tables as $table) {
-			$forma = "<form action=\"add.php\" method=\"POST\">";
+			$forma = "<form action=\"disease.php\" method=\"POST\">";
 			$forma.="<input type=\"hidden\" name=\"TABELA\" value=\"" . $table."\" size=\"20\" maxlength=\"30\" />";
 			$query = "SELECT * FROM `". $table ."` WHERE 1";
 			echo "<h1>". strtoupper($table) ."</h1>";
@@ -56,8 +56,8 @@
 				$row = mysqli_fetch_assoc($sukces);
 				foreach($row as $key => $obj){
 					if($key == 'id'){}
-					else if($key == 'haslo') {
-						$forma.= "Hasło" . ": <input type=\"password\" name=\"". $key ."\" size=\"20\" maxlength=\"30\" /><br>";
+					else if($key == 'id_pacjenta') {
+						$forma.= "<input type=\"hidden\" name=\"". $key ."\" value =\"" . $_POST['id_pacjenta'] . "\" size=\"20\" maxlength=\"30\" /><br>";
 
 					}
 					else {
@@ -68,17 +68,27 @@
 			$forma.= "<input type=\"submit\" value=\"Dodaj rekord\" />";
 			$forma.="</form>";
 			echo $forma;
+
+			$form2= "<form action=\"edit.php\">";
+			$form2.= "<input type=\"submit\" value=\"Wróć\" />";
+			$form2.= "</form>";	
+
+			$form3= "<form action=\"log2.php\">";
+			$form3.= "<input type=\"submit\" value=\"Wróć\" />";
+			$form3.= "</form>";
+
+			if($wiersz['uprawnienia'] == "1"){
+				echo $form2;
+			}
+			else {
+				echo $form3;
+			}		
 		}
 ?>	
-
-		<form action="log2.php">
-		<input type="submit" value="Wróć" />
-		</form>
 
 		<form action="wyloguj.php" method="POST">
 		<input type = "submit" value="Wyloguj"/>
 		</form>
-
 
 		<?
 

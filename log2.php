@@ -14,12 +14,12 @@
 		echo "Sesja nie zostala jeszcze zainicjowana <br><br>";
 		
 	if ((!isset($_POST['email'])) && (isset($_SESSION))){
-		$kwerenda = "select email, haslo, nazwisko, uprawnienia from uzytkownicy ";
-		$kwerenda.= "where nazwisko = \"". $_SESSION['nazwisko']. "\""; //"\" AND haslo = \"". md5($_SESSION['haslo']). "\"";
+		$kwerenda = "select id, email, haslo, nazwisko, uprawnienia from uzytkownicy ";
+		$kwerenda.= "where nazwisko = \"". $_SESSION['nazwisko']. "\""; 
 	}
 	else {
 
-	$kwerenda = "select email, haslo, nazwisko, uprawnienia from uzytkownicy ";
+	$kwerenda = "select id, email, haslo, nazwisko, uprawnienia from uzytkownicy ";
 	$kwerenda.= "where email = \"". $_POST['email']. "\"";
 	}
 	echo $kwerenda . "<br><br>";
@@ -49,9 +49,22 @@
 					case -1:
 						echo "Pacjent";
 						echo "<br>";
+
+						$forma1 ="<form action = \"edit2.php\" method=\"POST\">";
+						$forma1.="<input type=\"hidden\" name=\"id\" value=\"". $wiersz['id'] ."\" size=\"20\" maxlength=\"30\" />";
+						$forma1.= "<input type=\"submit\" value=\"Mój rekord pacjenta\" />";
+						$forma1.="</form>";
+
+						echo $forma1;
 						break;
 					case 0:
 						echo "Pracownik laboratorium";
+
+						$forma ="<form action = \"edit.php\" method=\"POST\">";
+						$forma.= "<input type=\"submit\" value=\"Dodaj badanie\" />";
+						$forma.="</form>";
+
+						echo $forma;
 						break;
 					case 1:
 						echo "Lekarz<br>";
@@ -64,32 +77,20 @@
 						$forma1.= "<input type=\"submit\" value=\"Wybierz pacjenta\" />";
 						$forma1.="</form>";
 
-						$forma2 ="<form action = \"delete.php\">";
-						$forma2.= "<input type=\"submit\" value=\"Usuwaj rekordy\" />";
-						$forma2.="</form>";
-
-						$forma3 ="<form action = \"calendar.php\">";
-						$forma3.= "<input type=\"submit\" id=\"login-button\" value=\"Przeglądaj kalendarz\" />";
-						$forma3.="</form>";
 
 						echo $forma;
 						echo $forma1;
-						echo $forma2;
-						echo $forma3;
+
 						break;
 					default:
 						echo "Coś poszło nie tak";
 						break;
 				}
-				$forma ="<form action = \"dalej.php\" method=\"POST\">";
-				$forma.= "<input type=\"submit\" value=\"Kontynuacja sesji\" />";
-				$forma.="</form>";
 				
-						$button="<form action=\"wyloguj.php\" method=\"POST\">";
-						$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
-						$button.= "</form>";
+				$button="<form action=\"wyloguj.php\" method=\"POST\">";
+				$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
+				$button.= "</form>";
 
-				echo $forma;
 				echo $button;
 				
 						$buttonek="<form action=\"index.php\" method=\"POST\">";
