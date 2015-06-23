@@ -3,7 +3,7 @@
 	include("nagl.php");
 	include ("polacz.php");
 	include("sessioncheck.php");
-	print_r($_POST);
+	
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == "0")){
 		$fhandle = fopen($_FILES['zdjecie']['tmp_name'], "r");
         $content = base64_encode(fread($fhandle, $_FILES['zdjecie']['size']));

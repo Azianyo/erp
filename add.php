@@ -5,7 +5,7 @@
 	include("polacz.php");
 	include("sessioncheck.php");
 
-	print_r($_SESSION);
+
 
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '1')){
 		$tables = array('uzytkownicy');

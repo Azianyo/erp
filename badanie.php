@@ -5,8 +5,6 @@
 	include("polacz.php");
 	include("sessioncheck.php");
 
-	print_r($_POST);
-
 	if((isset($_SESSION['login']))&&(md5($_SESSION['login'])==$wiersz['haslo'])&&($_SESSION['nazwisko']==$wiersz['nazwisko'])&&($wiersz['uprawnienia'] == '0')){
 		$tables = array('morfologia');
 		if(isset($_POST['TABELA'])) {

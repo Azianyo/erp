@@ -14,7 +14,7 @@ if(isset($_SESSION['login'])){
 		<html >
   <head>
     <meta charset="UTF-8">
-    <title>Calm breeze login screen</title>
+
     
     
 		<link rel="stylesheet" href="css/style.css">

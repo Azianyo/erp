@@ -24,7 +24,7 @@
 				while($row = mysqli_fetch_assoc($sukces)){
 					foreach($row as $key => $obj) {
 						if($key == 'zdjecie'){	
-							echo "<a href=\"http://student.agh.edu.pl/~borzemsk/erp/showimage.php?id=". $row['id'] ."\"> Link do zdjęcia </a>";
+							echo "<a href=\"http://student.agh.edu.pl/~borzemsk/erp/showimage.php?id=". $row['id'] ."\"><button>Link do zdjęcia</button></a>";
 						}
 						else if($key == "id_pacjenta" || $key == "id" || $key == 'id_lekarza') {}
 						else {
