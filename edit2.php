@@ -43,6 +43,8 @@
 
 	?>
 
+	<a href="http://FreeHTMLtoPDF.com/?convert=http%3A%2F%2Fwww.student.agh.edu.pl/~borzemsk/erp/edit2.php">Download as PDF</a>
+
 	<form action="disease.php" method="POST">
 	<input type="hidden" name="id_pacjenta" value=<?echo $_POST['id'];?> size="20" maxlength="30" />
 	<input type="submit" value="Dodaj przebytą chorobę" />

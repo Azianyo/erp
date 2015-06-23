@@ -90,7 +90,7 @@
 				$button="<form action=\"wyloguj.php\" method=\"POST\">";
 				$button.= "<input type = \"submit\" value=\"Wyloguj\"/>";
 				$button.= "</form>";
-
+				
 				echo $button;
 				
 						$buttonek="<form action=\"index.php\" method=\"POST\">";
